@@ -1,106 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resume | Your Name</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+            --bg: #f5f6fa;
+            --card: #ffffff;
+            --accent: #0f62fe;
+            --text: #1f2a37;
+            --subtle: #6b7280;
+            --border: #e5e7eb;
+        }
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
         }
         header {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 20px;
+            padding: 48px 20px 32px;
             text-align: center;
         }
-        h1, h2, h3 {
+        header h1 {
+            font-size: 2.25rem;
+            margin: 0 0 8px;
+        }
+        header p {
             margin: 0;
-            padding: 0;
+            color: var(--subtle);
+            font-size: 1.05rem;
+        }
+        .container {
+            width: min(960px, 100%);
+            margin: 0 auto 60px;
+            padding: 0 20px 32px;
+            display: grid;
+            gap: 24px;
+        }
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 2fr 1fr;
+            }
         }
         section {
-            margin: 20px auto;
-            max-width: 800px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: var(--card);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 10px 40px rgba(15, 98, 254, 0.08);
+            border: 1px solid var(--border);
         }
         h2 {
-            color: #4CAF50;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 5px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--subtle);
+            margin: 0 0 18px;
         }
-        ul {
-            padding: 0;
+        h3 {
+            margin: 0 0 4px;
+            font-size: 1.1rem;
+        }
+        .summary {
+            font-size: 1rem;
+            margin: 0;
+        }
+        .experience-item,
+        .project-item,
+        .education-item {
+            margin-bottom: 24px;
+        }
+        .experience-item:last-child,
+        .project-item:last-child,
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+        .meta {
+            font-weight: 500;
+            color: var(--accent);
+        }
+        .details {
+            color: var(--subtle);
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+        .skills-list,
+        .info-list {
             list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        li {
-            margin-bottom: 10px;
+        .skills-list li {
+            background: rgba(15, 98, 254, 0.08);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+        }
+        .info-list {
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-list a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .info-list a:hover {
+            border-color: var(--accent);
         }
         footer {
             text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-            color: #666;
-            background-color: #eee;
-        }
-        a {
-            color: #4CAF50;
-            text-decoration: none;
+            color: var(--subtle);
+            font-size: 0.9rem;
+            padding: 32px 20px 48px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>John Doe</h1>
-        <p>Software Engineer | Web Developer</p>
+        <h1>Yunlong Pan</h1>
+        <p>Data Researcher (Statistics, Deep Learning & AI) | Turning raw data into moments of delight</p>
     </header>
 
-    <section>
-        <h2>About Me</h2>
-        <p>Hello! I am a passionate web developer with experience in building responsive and beautiful websites. I enjoy turning ideas into reality with clean, efficient code.</p>
-    </section>
-
-    <section>
-        <h2>Experience</h2>
-        <ul>
-            <li><strong>Software Engineer</strong> - ABC Corp (2022 - Present)</li>
-            <li><strong>Web Developer Intern</strong> - XYZ Solutions (2021 - 2022)</li>
+    <main class="container">
+        <section>
+        <h2>Summary</h2>
+        <p class="summary">
+            I'm driven by the challenge of uncovering patterns in complex data and transforming them into actionable insights. 
+            I enjoy solving real-world problems by leveraging data-driven approaches that create meaningful impact and informed decisions.
+        </p>
+        <ul class="summary-points">
+            <li>Explore responsible and ethical AI usage.</li>
+            <li>Democratize deep learning for public benefit.</li>
+            <li>Maximize GPU performance to drive breakthrough discoveries.</li>
+            <li>Unite diverse researchers to spark transformative ideas.</li>
         </ul>
     </section>
 
-    <section>
-        <h2>Education</h2>
-        <ul>
-            <li><strong>Master of Science in Computer Science</strong> - University Name (2020 - 2022)</li>
-            <li><strong>Bachelor of Technology</strong> - College Name (2016 - 2020)</li>
-        </ul>
-    </section>
+        <div class="grid">
+            <section>
+                <h2>Experience</h2>
+                <div class="experience-item">
+                    <h3>Research Assistant · Stony Brook University</h3>
+                    <p class="meta">2024 – Present · Stony Brook, New York</p>
+                    <p class="details">
+                        <!-- Highlight measurable achievements, key technologies, and responsibilities that show
+                        leadership, ownership, or end-to-end delivery. -->
+                    </p>
+                </div>
+                <div class="experience-item">
+                    <h3>Teaching Assistant · Stony Brook University</h3>
+                    <p class="meta">2022 – 2024 · Stony Brook, New York</p>
+                    <p class="details">
+                        <!-- Focus on outcomes—performance gains, revenue impact, adoption metrics, or team/process improvements. -->
+                    </p>
+                </div>
+            </section>
 
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML, CSS, JavaScript</li>
-            <li>React, Node.js, Express</li>
-            <li>Python, Django</li>
-            <li>SQL, MongoDB</li>
-        </ul>
-    </section>
+            <section>
+                <h2>Snapshot</h2>
+                <ul class="info-list">
+                    <li>Location: Selden, New York</li>
+                    <li>Email: <a href="yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
+                    <li>GitHub: <a href="https://github.com/yl1127" target="_blank" rel="noreferrer">github.com/yl1127</a></li>
+                    <!-- <li>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></li> -->
+                    <!-- <li>Portfolio: <a href="https://yourdomain.com" target="_blank" rel="noreferrer">yourdomain.com</a></li> -->
+                </ul>
+            </section>
+        </div>
 
-    <section>
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:johndoe@example.com">johndoe@example.com</a></p>
-        <p>GitHub: <a href="https://github.com/yl1127" target="_blank">github.com/yl1127</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/yourname" target="_blank">linkedin.com/in/yourname</a></p>
-    </section>
+        <div class="grid">
+            <section>
+                <h2>Highlighted Projects</h2>
+                <div class="project-item">
+                    <h3>NeuralCora: a framework for Deep Learning research on Coastal Ocean Reanalysis</h3>
+                    <p class="meta">Lead · 2025(TBD)</p>
+                    <p class="details">
+                        NeuralCora aims to bring station-level forecasting—traditionally reliant on expensive observation devices—to broader coastal communities. 
+                        As the Student Research Lead, I oversee model design, data integration, and validation efforts to ensure accessible, accurate, and cost-effective climate insights powered by AI.  
+                        <!-- <br><br> -->
+                        <a href="https://github.com/yl1127/neuralcora" target="_blank" rel="noopener noreferrer">View Code on GitHub</a>
+                    </p>
+                </div>
+                <div class="project-item">
+                    <h3>Large Language Model and Traditional Machine Learning Scoring of Evolutionary Explanations: Benefits and Drawbacks</h3>
+                    <p class="meta">Co-author · 2025.5</p>
+                    <p class="details">
+                        <p class="details">
+                            Co-researched with Prof Nehm to compare large language models and traditional machine-learning methods for automated scoring of students' evolutionary explanations. 
+                            Contributed to prompt design, data processing, and statistical evaluation, revealing trade-offs between accuracy, efficiency, and reliability in AI-based assessment. 
+                            <a href="https://www.researchgate.net/publication/392214651_Large_Language_Model_and_Traditional_Machine_Learning_Scoring_of_Evolutionary_Explanations_Benefits_and_Drawbacks" target="_blank" rel="noopener noreferrer">Read Paper</a>
+                        </p>
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Skills</h2>
+<ul class="skills-list">
+    <li>Python, R, SAS, SQL, LaTex, markdown</li>
+    <li>pandas, NumPy, excel</li>
+    <li>Matplotlib, Plotly, Tableu</li>
+    <li>PyTorch, scikit-learn, ollama</li>
+    <li>Hugging face, Github, deeplearning.ai</li>
+    <li>AWS, Azure, Google Cloud, Docker</li>
+    <li>Communication & coordination</li>
+</ul>
+            </section>
+        </div>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Stony Brook University · Doctor of Philosophy(TBD)</h3>
+                <p class="meta">2022 – Current · Applied Math and Statistics</p>
+                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
+            </div>
+            <div class="education-item">
+                <h3>Stony Brook University · Master of Science</h3>
+                <p class="meta">2020 – 2022 · Applied Math and Statistics</p>
+                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
+            </div>
+            <div class="education-item">
+                <h3>Shandong University of Science and Technology · Bachelor of Science</h3>
+                <p class="meta">2015 – 2019 · Applied Mathematics </p>
+                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2024 John Doe | Hosted on GitHub Pages</p>
+        © <span id="year"></span> Yunlong · Built for GitHub Pages
     </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
