@@ -9,13 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            color-scheme: light;
+            color-scheme: light dark;
             --bg: #f5f6fa;
             --card: #ffffff;
             --accent: #0f62fe;
             --text: #1f2a37;
             --subtle: #6b7280;
             --border: #e5e7eb;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0b1220;
+                --card: #151d2f;
+                --accent: #5da2ff;
+                --text: #e2e8f0;
+                --subtle: #94a3b8;
+                --border: #1f2a3f;
+            }
         }
         * {
             box-sizing: border-box;
@@ -31,14 +41,41 @@
             padding: 48px 20px 32px;
             text-align: center;
         }
-        header h1 {
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .hero-text {
+            text-align: center;
+        }
+        .hero-text h1 {
             font-size: 2.25rem;
             margin: 0 0 8px;
         }
-        header p {
+        .hero-text p {
             margin: 0;
             color: var(--subtle);
             font-size: 1.05rem;
+        }
+        .hero-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card);
+            box-shadow: 0 10px 40px rgba(15, 98, 254, 0.2);
+        }
+        @media (min-width: 640px) {
+            .hero {
+                flex-direction: row;
+                justify-content: center;
+                text-align: left;
+            }
+            .hero-text {
+                text-align: left;
+            }
         }
         .container {
             width: min(960px, 100%);
@@ -223,8 +260,13 @@
 </head>
 <body>
     <header>
-        <h1>Yunlong Pan</h1>
-        <p>Data Researcher (Statistics, Deep Learning & AI) | Turning raw data into moments of delight</p>
+        <div class="hero">
+            <img class="hero-photo" src="./docs/intro-2025.jpg" alt="Portrait illustration representing Yunlong Pan" loading="lazy" decoding="async">
+            <div class="hero-text">
+                <h1>Yunlong Pan</h1>
+                <p>Data Researcher (Statistics, Deep Learning & AI) | Turning raw data into moments of delight</p>
+            </div>
+        </div>
     </header>
 
     <main class="container">
@@ -279,7 +321,7 @@
                 <h2>Highlighted Projects</h2>
                 <div class="project-item">
                     <h3>NeuralCora: a framework for Deep Learning research on Coastal Ocean Reanalysis</h3>
-                    <p class="meta">Lead · 2025(TBD)</p>
+                    <p class="meta">Lead · 2025 (TBD)</p>
                     <p class="details">
                         NeuralCora aims to bring station-level forecasting—traditionally reliant on expensive observation devices—to broader coastal communities. 
                         As the Student Research Lead, I oversee model design, data integration, and validation efforts to ensure accessible, accurate, and cost-effective climate insights powered by AI.  
@@ -333,23 +375,26 @@
             </div>
         </section>
 
-        <section>
-            <h2>Memories</h2>
-            <div class="memory-gallery">
-                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: dorm kitchen data lab">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Notebook, laptop, and coffee spread out on a small table">
-                    <figcaption>Dorm kitchen turned data lab—whiteboards on the fridge, code on the stove.</figcaption>
-                </figure>
-                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: buoy launch">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Calm ocean waves with late afternoon light">
-                    <figcaption>First NeuralCora buoy launch as community volunteers tracked every reading.</figcaption>
-                </figure>
-                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: AI ethics workshop">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Students gathered around a table engaged in discussion">
-                    <figcaption>Story-driven AI ethics class that turned statistics into shared narratives.</figcaption>
-                </figure>
-            </div>
-            <div class="memory-item">
+ <section>
+  <h2>Memories</h2>
+  <div class="memory-gallery">
+    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: ACM Sigmetrics 2025 conference">
+      <img src="./docs/ACM-2025.jpg" alt="Attending the ACM SIGMETRICS 2025 conference with Professor Liu" loading="lazy" decoding="async">
+      <figcaption>At the ACM SIGMETRICS 2025 conference with Professor Liu — an inspiring experience exploring cutting-edge research.</figcaption>
+    </figure>
+
+    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: NARST 2025 conference">
+      <img src="./docs/narst-2025.JPG" alt="Attending the NARST 2025 conference with Professor Nehm" loading="lazy" decoding="async">
+      <figcaption>Presenting at the NARST 2025 conference with Professor Nehm — sharing our work on science education and learning analytics.</figcaption>
+    </figure>
+
+    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: undergraduate graduation 2019">
+      <img src="./docs/graduate-2019.jpg" alt="Undergraduate graduation ceremony with my father in 2019" loading="lazy" decoding="async">
+      <figcaption>Celebrating my undergraduate graduation in 2019 — a proud moment shared with my dad.</figcaption>
+    </figure>
+  </div>
+</section>
+            <!-- <div class="memory-item">
                 <h3>Turning A Dorm Kitchen Into A Data War Room</h3>
                 <p class="meta">Spring 2020 · Stony Brook</p>
                 <p class="details">
@@ -369,7 +414,7 @@
                 <p class="details">
                     Turned a lecture into an improv session where students narrated cautionary tales for misused models—seeing responsibility “click” through shared stories reminded me why communicating data work matters.
                 </p>
-            </div>
+            </div> -->
         </section>
     </main>
 
