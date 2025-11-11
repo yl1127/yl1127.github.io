@@ -80,13 +80,101 @@
         }
         .experience-item,
         .project-item,
-        .education-item {
+        .education-item,
+        .memory-item {
             margin-bottom: 24px;
         }
         .experience-item:last-child,
         .project-item:last-child,
-        .education-item:last-child {
+        .education-item:last-child,
+        .memory-item:last-child {
             margin-bottom: 0;
+        }
+        .memory-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .memory-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f62fe;
+            color: #f5f6fa;
+            position: relative;
+            min-height: 180px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .memory-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .memory-card figcaption {
+            padding: 14px 16px 16px;
+            font-size: 0.95rem;
+        }
+        .memory-card:hover,
+        .memory-card:focus-visible {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(15, 98, 254, 0.25);
+            outline: none;
+        }
+        .memory-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(16, 27, 44, 0.78);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+        }
+        .memory-overlay.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .memory-overlay__content {
+            background: var(--card);
+            border-radius: 16px;
+            max-width: min(900px, 90vw);
+            width: 100%;
+            padding: 16px 16px 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            position: relative;
+        }
+        .memory-overlay__content img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .memory-overlay__content p {
+            margin: 14px 6px 0;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .memory-overlay__close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            border: none;
+            border-radius: 999px;
+            width: 36px;
+            height: 36px;
+            background: rgba(15, 98, 254, 0.1);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .memory-overlay__close:hover,
+        .memory-overlay__close:focus-visible {
+            background: rgba(15, 98, 254, 0.2);
         }
         .meta {
             font-weight: 500;
@@ -244,6 +332,45 @@
                 <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
             </div>
         </section>
+
+        <section>
+            <h2>Memories</h2>
+            <div class="memory-gallery">
+                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: dorm kitchen data lab">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Notebook, laptop, and coffee spread out on a small table">
+                    <figcaption>Dorm kitchen turned data lab—whiteboards on the fridge, code on the stove.</figcaption>
+                </figure>
+                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: buoy launch">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Calm ocean waves with late afternoon light">
+                    <figcaption>First NeuralCora buoy launch as community volunteers tracked every reading.</figcaption>
+                </figure>
+                <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: AI ethics workshop">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Students gathered around a table engaged in discussion">
+                    <figcaption>Story-driven AI ethics class that turned statistics into shared narratives.</figcaption>
+                </figure>
+            </div>
+            <div class="memory-item">
+                <h3>Turning A Dorm Kitchen Into A Data War Room</h3>
+                <p class="meta">Spring 2020 · Stony Brook</p>
+                <p class="details">
+                    Built my first end-to-end forecasting prototype while roommates cooked around me—whiteboards covered the fridge, CSVs lived beside spices, and the excitement of debugging in the middle of the night made the results unforgettable.
+                </p>
+            </div>
+            <div class="memory-item">
+                <h3>First Buoy Deployment With NeuralCora</h3>
+                <p class="meta">Summer 2023 · Long Island Sound</p>
+                <p class="details">
+                    Watching low-cost sensors stream live data into a model I trained felt like science fiction turning real; the community volunteers cheering each successful reading is still my favorite validation metric.
+                </p>
+            </div>
+            <div class="memory-item">
+                <h3>Teaching AI Ethics With Storytelling</h3>
+                <p class="meta">Fall 2024 · AMS 513</p>
+                <p class="details">
+                    Turned a lecture into an improv session where students narrated cautionary tales for misused models—seeing responsibility “click” through shared stories reminded me why communicating data work matters.
+                </p>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -251,7 +378,77 @@
     </footer>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
+        const yearEl = document.getElementById("year");
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
+        }
+
+        const memoryCards = document.querySelectorAll(".memory-card");
+        const overlay = document.createElement("div");
+        overlay.className = "memory-overlay";
+        overlay.id = "memoryOverlay";
+        overlay.setAttribute("aria-hidden", "true");
+        overlay.innerHTML = `
+            <div class="memory-overlay__content" role="dialog" aria-modal="true" aria-labelledby="memoryOverlayCaption">
+                <button class="memory-overlay__close" type="button" aria-label="Close enlarged memory photo">&times;</button>
+                <img id="memoryOverlayImage" src="" alt="">
+                <p id="memoryOverlayCaption"></p>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const overlayImage = overlay.querySelector("#memoryOverlayImage");
+        const overlayCaption = overlay.querySelector("#memoryOverlayCaption");
+        const closeOverlayBtn = overlay.querySelector(".memory-overlay__close");
+
+        const closeOverlay = () => {
+            overlay.classList.remove("is-visible");
+            overlay.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+            if (overlayImage) {
+                overlayImage.src = "";
+            }
+            if (overlayCaption) {
+                overlayCaption.textContent = "";
+            }
+        };
+
+        const openOverlay = (card) => {
+            const img = card.querySelector("img");
+            const caption = card.querySelector("figcaption");
+            if (!img || !caption || !overlayImage || !overlayCaption) {
+                return;
+            }
+            overlayImage.src = img.src;
+            overlayImage.alt = img.alt;
+            overlayCaption.textContent = caption.textContent;
+            overlay.classList.add("is-visible");
+            overlay.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+            closeOverlayBtn?.focus();
+        };
+
+        memoryCards.forEach((card) => {
+            card.addEventListener("click", () => openOverlay(card));
+            card.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openOverlay(card);
+                }
+            });
+        });
+
+        closeOverlayBtn?.addEventListener("click", closeOverlay);
+        overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) {
+                closeOverlay();
+            }
+        });
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && overlay.classList.contains("is-visible")) {
+                closeOverlay();
+            }
+        });
     </script>
 </body>
 </html>
