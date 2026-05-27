@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Yunlong's Homepage</title>
+    <meta name="description" content="Yunlong Pan's personal homepage for research, projects, education, and contact information.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             color-scheme: light dark;
@@ -16,6 +17,7 @@
             --text: #1f2a37;
             --subtle: #6b7280;
             --border: #e5e7eb;
+            --page-width: min(1180px, calc(100vw - 64px));
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -36,10 +38,52 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            padding: 0 clamp(16px, 4vw, 40px);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .site-nav {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+            justify-content: flex-start;
+            margin: 0 auto;
+            max-width: var(--page-width);
+            overflow-x: auto;
+            padding: 18px clamp(20px, 4vw, 40px) 0;
+            scrollbar-width: none;
+            width: 100%;
+        }
+        .site-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .site-nav a {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--subtle);
+            flex: 0 0 auto;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            text-decoration: none;
+        }
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            border-color: rgba(15, 98, 254, 0.35);
+            color: var(--accent);
+            outline: none;
+        }
+        @media (min-width: 700px) {
+            .site-nav {
+                justify-content: center;
+            }
         }
         header {
-            padding: 48px 20px 32px;
+            padding: 48px clamp(20px, 4vw, 40px) 32px;
             text-align: center;
+            width: 100%;
+            max-width: var(--page-width);
+            margin: 0 auto;
         }
         .hero {
             display: flex;
@@ -78,9 +122,10 @@
             }
         }
         .container {
-            width: min(960px, 100%);
+            width: 100%;
+            max-width: var(--page-width);
             margin: 0 auto 60px;
-            padding: 0 20px 32px;
+            padding: 0 clamp(20px, 4vw, 40px) 32px;
             display: grid;
             gap: 24px;
         }
@@ -99,6 +144,7 @@
             padding: 28px;
             box-shadow: 0 10px 40px rgba(15, 98, 254, 0.08);
             border: 1px solid var(--border);
+            scroll-margin-top: 20px;
         }
         h2 {
             font-size: 1rem;
@@ -134,6 +180,7 @@
             margin-bottom: 24px;
         }
         .memory-card {
+            margin: 0;
             border-radius: 12px;
             overflow: hidden;
             background: #0f62fe;
@@ -178,12 +225,17 @@
         }
         .memory-overlay__content {
             background: var(--card);
+            background-clip: padding-box;
             border-radius: 16px;
+            isolation: isolate;
+            max-height: 85vh;
             max-width: min(900px, 90vw);
+            overflow-y: auto;
             width: 100%;
             padding: 16px 16px 20px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
             position: relative;
+            z-index: 1001;
         }
         .memory-overlay__content img {
             width: 100%;
@@ -222,7 +274,6 @@
             font-size: 0.95rem;
             margin-top: 6px;
         }
-        .skills-list,
         .info-list {
             list-style: none;
             padding: 0;
@@ -231,12 +282,126 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        .skills-list li {
+        .skills-groups {
+            display: grid;
+            gap: 14px;
+        }
+        .skill-group h3 {
+            color: var(--text);
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+        }
+        .skill-group p {
+            color: var(--subtle);
+            font-size: 0.93rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .memory-overlay__content img[hidden],
+        #memoryOverlayCaption[hidden] {
+            display: none;
+        }
+        .skill-detail-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .skill-detail-list li {
             background: rgba(15, 98, 254, 0.08);
-            color: var(--accent);
-            padding: 6px 12px;
             border-radius: 999px;
-            font-size: 0.9rem;
+            color: var(--accent);
+            font-size: 0.95rem;
+            padding: 8px 12px;
+        }
+        .ai-learning {
+            display: grid;
+            gap: 22px;
+        }
+        .ai-learning__intro {
+            color: var(--subtle);
+            margin: 0;
+        }
+        .learning-platform-block {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        .learning-platform-block:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+        .learning-platform-block h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin: 0 0 6px;
+        }
+        .learning-platform-block h4 {
+            color: var(--text);
+            font-size: 1rem;
+            margin: 18px 0 12px;
+        }
+        .learning-platform-note {
+            color: var(--subtle);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .learning-platform-note a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(15, 98, 254, 0.35);
+        }
+        .learning-platform-note a:hover,
+        .learning-platform-note a:focus-visible {
+            border-color: var(--accent);
+            outline: none;
+        }
+        .course-list {
+            box-sizing: border-box;
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            list-style: none;
+            margin: 0;
+            max-height: 420px;
+            overflow-y: auto;
+            padding: 0 6px 0 0;
+        }
+        .course-list-wrap {
+            position: relative;
+        }
+        .course-list-wrap::after {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--card));
+            bottom: 0;
+            content: "";
+            height: 46px;
+            left: 0;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+        }
+        @media (prefers-color-scheme: dark) {
+            .course-list-wrap::after {
+                background: linear-gradient(to bottom, rgba(21, 29, 47, 0), var(--card));
+            }
+        }
+        .course-list li {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .course-list strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.35;
+        }
+        .course-list span {
+            color: var(--subtle);
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 4px;
         }
         .info-list {
             flex-direction: column;
@@ -250,27 +415,50 @@
         .info-list a:hover {
             border-color: var(--accent);
         }
+        main a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(15, 98, 254, 0.3);
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        main a:hover,
+        main a:focus-visible {
+            border-color: var(--accent);
+            color: var(--accent);
+            outline: none;
+        }
         footer {
             text-align: center;
             color: var(--subtle);
             font-size: 0.9rem;
-            padding: 32px 20px 48px;
+            padding: 32px clamp(16px, 4vw, 40px) 48px;
+            width: 100%;
+            max-width: var(--page-width);
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
+    <nav class="site-nav" aria-label="Primary sections">
+        <a href="#summary">Summary</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#memories">Memories</a>
+        <a href="#ai-learning">AI Learning</a>
+    </nav>
+
     <header>
         <div class="hero">
             <img class="hero-photo" src="./docs/intro-2025.jpg" alt="Portrait illustration representing Yunlong Pan" loading="lazy" decoding="async">
             <div class="hero-text">
                 <h1>Yunlong Pan</h1>
-                <p>Data Researcher (Statistics, Deep Learning & AI) | Turning raw data into moments of delight</p>
+                <p>Data Researcher (Statistics, Deep Learning &amp; AI) | Turning raw data into moments of delight</p>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section>
+        <section id="summary">
         <h2>Summary</h2>
         <p class="summary">
             I'm driven by the challenge of uncovering patterns in complex data and transforming them into actionable insights. 
@@ -285,11 +473,19 @@
     </section>
 
         <div class="grid">
-            <section>
+            <section id="projects">
                 <h2>Experience</h2>
                 <div class="experience-item">
+                    <h3>Research Assistant · Brookhaven National Lab</h3>
+                    <p class="meta">2026 – Present · Upton, New York</p>
+                    <p class="details">
+                        <!-- Highlight measurable achievements, key technologies, and responsibilities that show
+                        leadership, ownership, or end-to-end delivery. -->
+                    </p>
+                </div>
+                <div class="experience-item">
                     <h3>Research Assistant · Stony Brook University</h3>
-                    <p class="meta">2024 – Present · Stony Brook, New York</p>
+                    <p class="meta">2024 – 2026 · Stony Brook, New York</p>
                     <p class="details">
                         <!-- Highlight measurable achievements, key technologies, and responsibilities that show
                         leadership, ownership, or end-to-end delivery. -->
@@ -304,11 +500,11 @@
                 </div>
             </section>
 
-            <section>
+            <section id="skills">
                 <h2>Snapshot</h2>
                 <ul class="info-list">
-                    <li>Location: Selden, New York</li>
-                    <li>Email: <a href="yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
+                    <li>Location: Brookhaven, New York</li>
+                    <li>Email: <a href="mailto:yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
                     <li>GitHub: <a href="https://github.com/yl1127" target="_blank" rel="noreferrer">github.com/yl1127</a></li>
                     <!-- <li>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></li> -->
                     <!-- <li>Portfolio: <a href="https://yourdomain.com" target="_blank" rel="noreferrer">yourdomain.com</a></li> -->
@@ -319,9 +515,21 @@
         <div class="grid">
             <section>
                 <h2>Highlighted Projects</h2>
+
+                <div class="project-item">
+                    <h3>HybridSCM</h3>
+                    <p class="meta">Project Lead · 2026 (TBD)</p>
+                    <p class="details">
+                        Led the development of a hybrid climate-modeling workflow combining E3SM-SCM simulations with neural surrogate models for fast parameter sensitivity analysis and uncertainty quantification.
+                        Designed automated pipelines for experiment sampling, batch simulation, output processing, and visualization, reducing the cost of exploring large climate parameter spaces.
+                        <br><br>
+                        <!-- <a href="https://github.com/yl1127/neuralcora" target="_blank" rel="noopener noreferrer">View Code on GitHub</a> -->
+                    </p>
+                </div>
+                
                 <div class="project-item">
                     <h3>NeuralCora: a framework for Deep Learning research on Coastal Ocean Reanalysis</h3>
-                    <p class="meta">Lead · 2025 (TBD)</p>
+                    <p class="meta">Project Lead · 2025 (TBD)</p>
                     <p class="details">
                         NeuralCora aims to bring station-level forecasting—traditionally reliant on expensive observation devices—to broader coastal communities. 
                         As the Student Research Lead, I oversee model design, data integration, and validation efforts to ensure accessible, accurate, and cost-effective climate insights powered by AI.  
@@ -333,26 +541,33 @@
                     <h3>Large Language Model and Traditional Machine Learning Scoring of Evolutionary Explanations: Benefits and Drawbacks</h3>
                     <p class="meta">Co-author · 2025.5</p>
                     <p class="details">
-                        <p class="details">
-                            Co-researched with Prof Nehm to compare large language models and traditional machine-learning methods for automated scoring of students' evolutionary explanations. 
-                            Contributed to prompt design, data processing, and statistical evaluation, revealing trade-offs between accuracy, efficiency, and reliability in AI-based assessment. 
-                            <a href="https://www.researchgate.net/publication/392214651_Large_Language_Model_and_Traditional_Machine_Learning_Scoring_of_Evolutionary_Explanations_Benefits_and_Drawbacks" target="_blank" rel="noopener noreferrer">Read Paper</a>
-                        </p>
+                        Co-researched with Prof Nehm to compare large language models and traditional machine-learning methods for automated scoring of students' evolutionary explanations. 
+                        Contributed to prompt design, data processing, and statistical evaluation, revealing trade-offs between accuracy, efficiency, and reliability in AI-based assessment. 
+                        <a href="https://www.researchgate.net/publication/392214651_Large_Language_Model_and_Traditional_Machine_Learning_Scoring_of_Evolutionary_Explanations_Benefits_and_Drawbacks" target="_blank" rel="noopener noreferrer">Read Paper</a>
                     </p>
                 </div>
             </section>
 
             <section>
                 <h2>Skills</h2>
-<ul class="skills-list">
-    <li>Python, R, SAS, SQL, LaTex, markdown</li>
-    <li>pandas, NumPy, excel</li>
-    <li>Matplotlib, Plotly, Tableu</li>
-    <li>PyTorch, scikit-learn, ollama</li>
-    <li>Hugging face, Github, deeplearning.ai</li>
-    <li>AWS, Azure, Google Cloud, Docker</li>
-    <li>Communication & coordination</li>
-</ul>
+                <div class="skills-groups">
+                    <div class="skill-group">
+                        <h3>Research Computing</h3>
+                        <p>Python · R · SQL · SAS · NumPy · pandas</p>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Machine Learning</h3>
+                        <p>PyTorch · scikit-learn · Ollama · Hugging Face</p>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Scientific Workflows</h3>
+                        <p>E3SM · scmlib · SciPy · Plotly · Matplotlib · xarray</p>
+                    </div>
+                    <div class="skill-group">
+                        <h3>Deployment &amp; Tools</h3>
+                        <p>GitHub · Docker · AWS · Azure · Google Cloud · n8n</p>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -375,7 +590,7 @@
             </div>
         </section>
 
- <section>
+ <section id="memories">
   <h2>Memories</h2>
   <div class="memory-gallery">
     <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: ACM Sigmetrics 2025 conference">
@@ -394,28 +609,14 @@
     </figure>
   </div>
 </section>
-            <!-- <div class="memory-item">
-                <h3>Turning A Dorm Kitchen Into A Data War Room</h3>
-                <p class="meta">Spring 2020 · Stony Brook</p>
-                <p class="details">
-                    Built my first end-to-end forecasting prototype while roommates cooked around me—whiteboards covered the fridge, CSVs lived beside spices, and the excitement of debugging in the middle of the night made the results unforgettable.
-                </p>
-            </div>
-            <div class="memory-item">
-                <h3>First Buoy Deployment With NeuralCora</h3>
-                <p class="meta">Summer 2023 · Long Island Sound</p>
-                <p class="details">
-                    Watching low-cost sensors stream live data into a model I trained felt like science fiction turning real; the community volunteers cheering each successful reading is still my favorite validation metric.
-                </p>
-            </div>
-            <div class="memory-item">
-                <h3>Teaching AI Ethics With Storytelling</h3>
-                <p class="meta">Fall 2024 · AMS 513</p>
-                <p class="details">
-                    Turned a lecture into an improv session where students narrated cautionary tales for misused models—seeing responsibility “click” through shared stories reminded me why communicating data work matters.
-                </p>
-            </div> -->
+
+        <section class="ai-learning" id="ai-learning">
+            <h2>AI Learning &amp; Practice</h2>
+            <p class="ai-learning__intro">
+                A running record of my applied AI learning, combining structured short courses with hands-on local AI workflow playbooks.
+            </p>
         </section>
+
     </main>
 
     <footer>
@@ -428,7 +629,7 @@
             yearEl.textContent = new Date().getFullYear();
         }
 
-        const memoryCards = document.querySelectorAll(".memory-card");
+        const expandableCards = document.querySelectorAll(".memory-card");
         const overlay = document.createElement("div");
         overlay.className = "memory-overlay";
         overlay.id = "memoryOverlay";
@@ -445,6 +646,160 @@
         const overlayImage = overlay.querySelector("#memoryOverlayImage");
         const overlayCaption = overlay.querySelector("#memoryOverlayCaption");
         const closeOverlayBtn = overlay.querySelector(".memory-overlay__close");
+        let lastFocusedElement = null;
+
+        const deeplearningAiCourses = [
+            ["Event-Driven Agentic Document Workflows", "LlamaIndex", "59m", "Beginner"],
+            ["Reinforcement Fine-Tuning LLMs With GRPO", "Predibase", "1h23m", "Intermediate"],
+            ["MCP: Build Rich-Context AI Apps with Anthropic", "Anthropic", "1h38m", "Intermediate"],
+            ["Building Agentic RAG with Llamaindex", "LlamaIndex", "44m", "Beginner"],
+            ["AI Agents in LangGraph", "LangChain, Tavily", "1h32m", "Intermediate"],
+            ["Preprocessing Unstructured Data for LLM Applications", "Unstructured", "1h12m", "Beginner"],
+            ["AI Python for Beginners", "DeepLearning.AI", "10h20m", "Beginner"],
+            ["Building Generative AI Applications with Gradio", "Hugging Face", "49m", "Beginner"],
+            ["Building and Evaluating Advanced RAG", "TruEra, LlamaIndex", "1h55m", "Beginner"],
+            ["Multimodal RAG: Chat with Videos", "Intel", "1h", "Intermediate"],
+            ["Quantization in Depth", "Hugging Face", "2h10m", "Intermediate"],
+            ["Prompt Engineering with Llama 2&3", "Meta", "1h53m", "Beginner"],
+            ["Pretraining LLMs", "Upstage", "1h19m", "Intermediate"],
+            ["Intro to Federated Learning", "Flower Labs", "1h8m", "Beginner"],
+            ["Improving Accuracy of LLM Applications", "AMD, formerly Lamini, Meta", "1h41m", "Intermediate"],
+            ["Large Language Models with Semantic Search", "Cohere", "1h12m", "Beginner"],
+            ["Function-calling and data extraction with LLMs", "Nexusflow", "59m", "Beginner"],
+            ["AI Agentic Design Patterns with AutoGen", "Microsoft, Penn State University", "1h25m", "Beginner"],
+            ["Attention in Transformers: Concepts and Code in PyTorch", "StatQuest", "1h6m", "Beginner"],
+            ["How Transformer LLMs Work", "Jay Alammar, Maarten Grootendorst", "1h34m", "Beginner"],
+            ["Building toward Computer Use with Anthropic", "Anthropic", "1h37m", "Beginner"],
+            ["Reasoning with o1", "OpenAI", "1h24m", "Intermediate"],
+            ["Collaborative Writing and Coding with OpenAI Canvas", "OpenAI", "37m", "Beginner"],
+            ["Building Your Own Database Agent", "Microsoft", "58m", "Beginner"],
+            ["Prompt Engineering for Vision Models", "Comet", "1h22m", "Beginner"],
+            ["Getting Started with Mistral", "Mistral AI", "52m", "Beginner"],
+            ["Quantization Fundamentals with Hugging Face", "Hugging Face", "1h4m", "Beginner"],
+            ["Building Systems with the ChatGPT API", "OpenAI", "1h45m", "Beginner"],
+            ["Knowledge Graphs for RAG", "Neo4j", "1h54m", "Intermediate"],
+            ["Open Source Models with Hugging Face", "Hugging Face", "2h3m", "Beginner"],
+            ["Reinforcement Learning From Human Feedback", "Google Cloud", "1h12m", "Intermediate"],
+            ["Functions, Tools and Agents with LangChain", "LangChain", "1h44m", "Intermediate"],
+            ["Finetuning Large Language Models", "AMD, formerly Lamini", "1h25m", "Intermediate"],
+            ["LangChain Chat with Your Data", "LangChain", "1h8m", "Beginner"],
+            ["ChatGPT Prompt Engineering for Developers", "OpenAI", "1h30m", "Beginner"],
+            ["LangChain for LLM Application Development", "LangChain", "1h38m", "Beginner"],
+            ["Advanced Retrieval for AI with Chroma", "Chroma", "52m", "Intermediate"],
+            ["How Diffusion Models Work", "DeepLearning.AI", "36m", "Intermediate"],
+        ];
+
+        const nvidiaDgxSparkPlaybooks = [
+            ["Single-cell RNA Sequencing", "15 min · End-to-end GPU-powered workflow for scRNA-seq using RAPIDS."],
+            ["Portfolio Optimization", "20 min · GPU-accelerated portfolio optimization using cuOpt and cuML."],
+            ["CUDA-X Data Science", "30 min · Accelerate UMAP, HDBSCAN, pandas, and more with NVIDIA cuML and cuDF."],
+            ["Text to Knowledge Graph", "30 min · Transform unstructured text into interactive knowledge graphs with LLM inference and graph visualization."],
+            ["Optimized JAX", "2 hrs · Optimize JAX to run on Spark."],
+            ["LLaMA Factory", "Install and fine-tune models with LLaMA Factory."],
+            ["Fine-tune with Pytorch", "Use Pytorch to fine-tune models locally."],
+            ["FLUX.1 Dreambooth LoRA Fine-tuning", "1 hr · Fine-tune FLUX.1-dev 12B with Dreambooth LoRA for custom image generation."],
+            ["Fine-tune with NeMo", "1 hr · Use NVIDIA NeMo to fine-tune models locally."],
+            ["Unsloth on DGX Spark", "1 hr · Optimized fine-tuning with Unsloth."],
+            ["Speculative Decoding", "30 min · Set up speculative decoding for fast inference on Spark."],
+            ["Run models with llama.cpp on DGX Spark", "30 min · Build llama.cpp with CUDA and serve models via an OpenAI-compatible API."],
+            ["Nemotron-3-Nano with llama.cpp", "30 min · Run Nemotron-3-Nano-30B using llama.cpp on DGX Spark."],
+            ["SGLang for Inference", "30 min · Install and use SGLang on DGX Spark."],
+            ["NIM on Spark", "30 min · Deploy a NIM on Spark."],
+            ["LM Studio on DGX Spark", "30 min · Deploy LM Studio, serve LLMs on Spark, and use LM Link remotely."],
+            ["vLLM for Inference", "30 min · Install and use vLLM on DGX Spark."],
+            ["TRT LLM for Inference", "1 hr · Install and use TensorRT-LLM on DGX Spark."],
+            ["NVFP4 Quantization", "1 hr · Quantize a model to NVFP4 using TensorRT Model Optimizer."],
+            ["Multi-modal Inference", "1 hr · Set up multi-modal inference with TensorRT."],
+            ["Connect Three DGX Spark in a Ring Topology", "Connect and set up three DGX Spark devices in a ring topology."],
+            ["Connect Multiple DGX Spark through a Switch", "Set up a cluster of DGX Spark devices connected through a switch."],
+            ["VS Code", "5 min · Install and use VS Code locally or remotely."],
+            ["RAG Application in AI Workbench", "30 min · Clone and run a reproducible RAG application with AI Workbench."],
+            ["Set up Tailscale on Your Spark", "30 min · Connect to Spark on a home network from anywhere."],
+            ["Connect Two Sparks", "Connect two Spark devices and set them up for inference and fine-tuning."],
+            ["Build a Video Search and Summarization (VSS) Agent", "Run the VSS Blueprint on Spark."],
+            ["Spark & Reachy Photo Booth", "2 hrs · AI augmented photo booth using DGX Spark and Reachy Mini."],
+            ["OpenClaw", "Run OpenClaw locally on DGX Spark with LM Studio or Ollama."],
+            ["CLI Coding Agent", "20 min · Build local CLI coding agents with Ollama."],
+            ["Live VLM WebUI", "20 min · Real-time vision-language model interaction with webcam streaming."],
+            ["Run Hermes Agent with Local Models", "30 min · Install and run the Hermes self-improving AI agent on DGX Spark."],
+            ["NemoClaw with Nemotron 3 Super and Telegram on DGX Spark", "30 min · Local Ollama inference with Telegram bot integration."],
+            ["Install and Use Isaac Sim and Isaac Lab", "30 min · Build Isaac Sim and Isaac Lab from source for Spark."],
+            ["Vibe Coding in VS Code", "30 min · Use DGX Spark as a local or remote coding assistant with Ollama and Continue."],
+            ["NCCL for Two Sparks", "30 min · Install and test NCCL on two Sparks."],
+            ["Secure Long Running AI Agents with OpenShell on DGX Spark", "30 min · Run OpenClaw with local models in an NVIDIA OpenShell sandbox."],
+            ["cuTile Kernels", "60 min · Run cuTile kernel benchmarks, FMHA implementation, and LLM inference on DGX Spark and B300."],
+            ["Build and Deploy a Multi-Agent Chatbot", "1 hr · Deploy a multi-agent chatbot system and chat with agents on Spark."],
+        ];
+
+        const renderLearningPlatformBlock = (container, { title, note, link, heading, items, itemMeta }) => {
+            const block = document.createElement("div");
+            block.className = "learning-platform-block";
+
+            const platform = document.createElement("h3");
+            platform.textContent = title;
+
+            const noteEl = document.createElement("p");
+            noteEl.className = "learning-platform-note";
+            noteEl.textContent = note;
+            if (link) {
+                noteEl.append(" ");
+                const noteLink = document.createElement("a");
+                noteLink.href = link.href;
+                noteLink.target = "_blank";
+                noteLink.rel = "noopener noreferrer";
+                noteLink.textContent = link.text;
+                noteEl.appendChild(noteLink);
+            }
+
+            const courseHeading = document.createElement("h4");
+            courseHeading.textContent = `${heading} · ${items.length}`;
+
+            const courseList = document.createElement("ul");
+            courseList.className = "course-list";
+            items.forEach((itemData) => {
+                const item = document.createElement("li");
+                const titleEl = document.createElement("strong");
+                const metaEl = document.createElement("span");
+                titleEl.textContent = itemData[0];
+                metaEl.textContent = itemMeta(itemData);
+                item.append(titleEl, metaEl);
+                courseList.appendChild(item);
+            });
+
+            const courseListWrap = document.createElement("div");
+            courseListWrap.className = "course-list-wrap";
+            courseListWrap.appendChild(courseList);
+
+            block.append(platform, noteEl, courseHeading, courseListWrap);
+            container.appendChild(block);
+        };
+
+        const renderAiLearningSection = () => {
+            const container = document.querySelector("#ai-learning");
+            if (!container) {
+                return;
+            }
+
+            renderLearningPlatformBlock(container, {
+                title: "DeepLearning.AI",
+                note: "All completed courses from my DeepLearning.AI learning track.",
+                heading: "Completed Courses",
+                items: deeplearningAiCourses,
+                itemMeta: ([, provider, duration, level]) => `${provider} · ${duration} · ${level} · Completed`,
+            });
+
+            renderLearningPlatformBlock(container, {
+                title: "NVIDIA DGX Spark Playbooks",
+                note: "All playbooks: detailed instructions to set up and run popular AI workflows on DGX Spark.",
+                link: {
+                    href: "https://github.com/NVIDIA/dgx-spark-playbooks/tree/main",
+                    text: "View repository",
+                },
+                heading: "All Playbooks",
+                items: nvidiaDgxSparkPlaybooks,
+                itemMeta: ([, description]) => description,
+            });
+        };
 
         const closeOverlay = () => {
             overlay.classList.remove("is-visible");
@@ -456,6 +811,8 @@
             if (overlayCaption) {
                 overlayCaption.textContent = "";
             }
+            lastFocusedElement?.focus();
+            lastFocusedElement = null;
         };
 
         const openOverlay = (card) => {
@@ -464,6 +821,9 @@
             if (!img || !caption || !overlayImage || !overlayCaption) {
                 return;
             }
+            lastFocusedElement = document.activeElement;
+            overlayImage.hidden = false;
+            overlayCaption.hidden = false;
             overlayImage.src = img.src;
             overlayImage.alt = img.alt;
             overlayCaption.textContent = caption.textContent;
@@ -473,7 +833,7 @@
             closeOverlayBtn?.focus();
         };
 
-        memoryCards.forEach((card) => {
+        expandableCards.forEach((card) => {
             card.addEventListener("click", () => openOverlay(card));
             card.addEventListener("keydown", (event) => {
                 if (event.key === "Enter" || event.key === " ") {
@@ -490,10 +850,32 @@
             }
         });
         window.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && overlay.classList.contains("is-visible")) {
+            if (!overlay.classList.contains("is-visible")) {
+                return;
+            }
+            if (event.key === "Escape") {
                 closeOverlay();
+                return;
+            }
+            if (event.key !== "Tab") {
+                return;
+            }
+            const focusableElements = overlay.querySelectorAll("button, [href], [tabindex]:not([tabindex='-1'])");
+            if (!focusableElements.length) {
+                return;
+            }
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+            if (event.shiftKey && document.activeElement === firstFocusable) {
+                event.preventDefault();
+                lastFocusable.focus();
+            } else if (!event.shiftKey && document.activeElement === lastFocusable) {
+                event.preventDefault();
+                firstFocusable.focus();
             }
         });
+
+        renderAiLearningSection();
     </script>
 </body>
 </html>
