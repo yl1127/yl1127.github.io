@@ -8,588 +8,127 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    <style>
-        :root {
-            color-scheme: light dark;
-            --bg: #f5f6fa;
-            --card: #ffffff;
-            --accent: #0f62fe;
-            --text: #1f2a37;
-            --subtle: #6b7280;
-            --border: #e5e7eb;
-            --page-width: min(1180px, calc(100vw - 64px));
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0b1220;
-                --card: #151d2f;
-                --accent: #5da2ff;
-                --text: #e2e8f0;
-                --subtle: #94a3b8;
-                --border: #1f2a3f;
-            }
-        }
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            padding: 0 clamp(16px, 4vw, 40px);
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .site-nav {
-            align-items: center;
-            display: flex;
-            gap: 8px;
-            justify-content: flex-start;
-            margin: 0 auto;
-            max-width: var(--page-width);
-            overflow-x: auto;
-            padding: 18px clamp(20px, 4vw, 40px) 0;
-            scrollbar-width: none;
-            width: 100%;
-        }
-        .site-nav::-webkit-scrollbar {
-            display: none;
-        }
-        .site-nav a {
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            color: var(--subtle);
-            flex: 0 0 auto;
-            font-size: 0.9rem;
-            padding: 6px 12px;
-            text-decoration: none;
-        }
-        .site-nav a:hover,
-        .site-nav a:focus-visible {
-            border-color: rgba(15, 98, 254, 0.35);
-            color: var(--accent);
-            outline: none;
-        }
-        @media (min-width: 700px) {
-            .site-nav {
-                justify-content: center;
-            }
-        }
-        header {
-            padding: 48px clamp(20px, 4vw, 40px) 32px;
-            text-align: center;
-            width: 100%;
-            max-width: var(--page-width);
-            margin: 0 auto;
-        }
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .hero-text {
-            text-align: center;
-        }
-        .hero-text h1 {
-            font-size: 2.25rem;
-            margin: 0 0 8px;
-        }
-        .hero-text p {
-            margin: 0;
-            color: var(--subtle);
-            font-size: 1.05rem;
-        }
-        .hero-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--card);
-            box-shadow: 0 10px 40px rgba(15, 98, 254, 0.2);
-        }
-        @media (min-width: 640px) {
-            .hero {
-                flex-direction: row;
-                justify-content: center;
-                text-align: left;
-            }
-            .hero-text {
-                text-align: left;
-            }
-        }
-        .container {
-            width: 100%;
-            max-width: var(--page-width);
-            margin: 0 auto 60px;
-            padding: 0 clamp(20px, 4vw, 40px) 32px;
-            display: grid;
-            gap: 24px;
-        }
-        .grid {
-            display: grid;
-            gap: 24px;
-        }
-        @media (min-width: 768px) {
-            .grid {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-        section {
-            background: var(--card);
-            border-radius: 14px;
-            padding: 28px;
-            box-shadow: 0 10px 40px rgba(15, 98, 254, 0.08);
-            border: 1px solid var(--border);
-            scroll-margin-top: 20px;
-        }
-        h2 {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--subtle);
-            margin: 0 0 18px;
-        }
-        h3 {
-            margin: 0 0 4px;
-            font-size: 1.1rem;
-        }
-        .summary {
-            font-size: 1rem;
-            margin: 0;
-        }
-        .experience-item,
-        .project-item,
-        .education-item,
-        .memory-item {
-            margin-bottom: 24px;
-        }
-        .experience-item:last-child,
-        .project-item:last-child,
-        .education-item:last-child,
-        .memory-item:last-child {
-            margin-bottom: 0;
-        }
-        .memory-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-        .memory-card {
-            margin: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #0f62fe;
-            color: #f5f6fa;
-            position: relative;
-            min-height: 180px;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .memory-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-        .memory-card figcaption {
-            padding: 14px 16px 16px;
-            font-size: 0.95rem;
-        }
-        .memory-card:hover,
-        .memory-card:focus-visible {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(15, 98, 254, 0.25);
-            outline: none;
-        }
-        .memory-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(16, 27, 44, 0.78);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            z-index: 1000;
-        }
-        .memory-overlay.is-visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .memory-overlay__content {
-            background: var(--card);
-            background-clip: padding-box;
-            border-radius: 16px;
-            isolation: isolate;
-            max-height: 85vh;
-            max-width: min(900px, 90vw);
-            overflow-y: auto;
-            width: 100%;
-            padding: 16px 16px 20px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-            position: relative;
-            z-index: 1001;
-        }
-        .memory-overlay__content img {
-            width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-        .memory-overlay__content p {
-            margin: 14px 6px 0;
-            color: var(--text);
-            font-size: 1rem;
-        }
-        .memory-overlay__close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            border: none;
-            border-radius: 999px;
-            width: 36px;
-            height: 36px;
-            background: rgba(15, 98, 254, 0.1);
-            color: var(--text);
-            font-size: 1.1rem;
-            cursor: pointer;
-        }
-        .memory-overlay__close:hover,
-        .memory-overlay__close:focus-visible {
-            background: rgba(15, 98, 254, 0.2);
-        }
-        .meta {
-            font-weight: 500;
-            color: var(--accent);
-        }
-        .details {
-            color: var(--subtle);
-            font-size: 0.95rem;
-            margin-top: 6px;
-        }
-        .info-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .skills-groups {
-            display: grid;
-            gap: 14px;
-        }
-        .skill-group h3 {
-            color: var(--text);
-            font-size: 0.98rem;
-            margin-bottom: 6px;
-        }
-        .skill-group p {
-            color: var(--subtle);
-            font-size: 0.93rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-        .memory-overlay__content img[hidden],
-        #memoryOverlayCaption[hidden] {
-            display: none;
-        }
-        .skill-detail-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .skill-detail-list li {
-            background: rgba(15, 98, 254, 0.08);
-            border-radius: 999px;
-            color: var(--accent);
-            font-size: 0.95rem;
-            padding: 8px 12px;
-        }
-        .ai-learning {
-            display: grid;
-            gap: 22px;
-        }
-        .ai-learning__intro {
-            color: var(--subtle);
-            margin: 0;
-        }
-        .learning-platform-block {
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-        }
-        .learning-platform-block:first-of-type {
-            border-top: none;
-            padding-top: 0;
-        }
-        .learning-platform-block h3 {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin: 0 0 6px;
-        }
-        .learning-platform-block h4 {
-            color: var(--text);
-            font-size: 1rem;
-            margin: 18px 0 12px;
-        }
-        .learning-platform-note {
-            color: var(--subtle);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-        .learning-platform-note a {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(15, 98, 254, 0.35);
-        }
-        .learning-platform-note a:hover,
-        .learning-platform-note a:focus-visible {
-            border-color: var(--accent);
-            outline: none;
-        }
-        .course-list {
-            box-sizing: border-box;
-            display: grid;
-            gap: 10px;
-            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-            list-style: none;
-            margin: 0;
-            max-height: 420px;
-            overflow-y: auto;
-            padding: 0 6px 0 0;
-        }
-        .course-list-wrap {
-            position: relative;
-        }
-        .course-list-wrap::after {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--card));
-            bottom: 0;
-            content: "";
-            height: 46px;
-            left: 0;
-            pointer-events: none;
-            position: absolute;
-            right: 0;
-        }
-        @media (prefers-color-scheme: dark) {
-            .course-list-wrap::after {
-                background: linear-gradient(to bottom, rgba(21, 29, 47, 0), var(--card));
-            }
-        }
-        .course-list li {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 12px;
-        }
-        .course-list strong {
-            display: block;
-            color: var(--text);
-            font-size: 0.95rem;
-            line-height: 1.35;
-        }
-        .course-list span {
-            color: var(--subtle);
-            display: block;
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-        .info-list {
-            flex-direction: column;
-            gap: 12px;
-        }
-        .info-list a {
-            color: inherit;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-        }
-        .info-list a:hover {
-            border-color: var(--accent);
-        }
-        main a {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(15, 98, 254, 0.3);
-            transition: border-color 0.2s ease, color 0.2s ease;
-        }
-        main a:hover,
-        main a:focus-visible {
-            border-color: var(--accent);
-            color: var(--accent);
-            outline: none;
-        }
-        footer {
-            text-align: center;
-            color: var(--subtle);
-            font-size: 0.9rem;
-            padding: 32px clamp(16px, 4vw, 40px) 48px;
-            width: 100%;
-            max-width: var(--page-width);
-            margin: 0 auto;
-        }
-    </style>
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("homepage-theme");
+            if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.theme = savedTheme;
+        } catch {}
+    </script>
+    <link rel="stylesheet" href="./styles.css?v=20261013-ai-details">
 </head>
 <body>
-    <nav class="site-nav" aria-label="Primary sections">
-        <a href="#summary">Summary</a>
-        <a href="#projects">Projects</a>
+    <nav class="site-nav site-nav--sticky" aria-label="Primary sections">
+        <a class="nav-profile" href="#about" aria-label="Yunlong Pan — back to introduction">
+            <img src="./docs/intro-2025.jpg" alt="" width="32" height="32">
+            <span>Yunlong Pan</span>
+        </a>
+        <div class="nav-controls">
+        <div class="nav-section-links">
+        <a href="#research">Research</a>
+        <span aria-hidden="true">|</span>
+        <a href="#experience">Experience</a>
+        <span aria-hidden="true">|</span>
         <a href="#skills">Skills</a>
+        <span aria-hidden="true">|</span>
+        <a href="#education">Education</a>
+        <span aria-hidden="true">|</span>
         <a href="#memories">Memories</a>
-        <a href="#ai-learning">AI Learning</a>
+        <span aria-hidden="true">|</span>
+        <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" hidden>
+            <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+            <svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>
+        </button>
+        </div>
     </nav>
-
-    <header>
+    <header id="about">
         <div class="hero">
-            <img class="hero-photo" src="./docs/intro-2025.jpg" alt="Portrait illustration representing Yunlong Pan" loading="lazy" decoding="async">
+            <img class="hero-photo" src="./docs/intro-2025.jpg" alt="Yunlong Pan" decoding="async">
             <div class="hero-text">
                 <h1>Yunlong Pan</h1>
-                <p>Data Researcher (Statistics, Deep Learning &amp; AI) | Turning raw data into moments of delight</p>
+                <p class="affiliation">PhD Student · Applied Mathematics &amp; Statistics, Stony Brook University<br>Research Assistant · Computing and Data Sciences (CDS) · Brookhaven National Laboratory</p>
+                <p class="research-intro">My research focuses on scientific machine learning and uncertainty quantification, with applications to climate modeling. I use surrogate models and Bayesian methods to accelerate simulations and quantify predictive uncertainty.</p>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section id="summary">
-        <h2>Summary</h2>
-        <p class="summary">
-            I'm driven by the challenge of uncovering patterns in complex data and transforming them into actionable insights. 
-            I enjoy solving real-world problems by leveraging data-driven approaches that create meaningful impact and informed decisions.
-        </p>
-        <ul class="summary-points">
-            <li>Explore responsible and ethical AI usage.</li>
-            <li>Democratize deep learning for public benefit.</li>
-            <li>Maximize GPU performance to drive breakthrough discoveries.</li>
-            <li>Unite diverse researchers to spark transformative ideas.</li>
-        </ul>
-    </section>
 
-        <div class="grid">
-            <section id="projects">
-                <h2>Experience</h2>
-                <div class="experience-item">
-                    <h3>Research Assistant · Brookhaven National Lab</h3>
-                    <p class="meta">2026 – Present · Upton, New York</p>
-                    <p class="details">
-                        <!-- Highlight measurable achievements, key technologies, and responsibilities that show
-                        leadership, ownership, or end-to-end delivery. -->
-                    </p>
-                </div>
-                <div class="experience-item">
-                    <h3>Research Assistant · Stony Brook University</h3>
-                    <p class="meta">2024 – 2026 · Stony Brook, New York</p>
-                    <p class="details">
-                        <!-- Highlight measurable achievements, key technologies, and responsibilities that show
-                        leadership, ownership, or end-to-end delivery. -->
-                    </p>
-                </div>
-                <div class="experience-item">
-                    <h3>Teaching Assistant · Stony Brook University</h3>
-                    <p class="meta">2022 – 2024 · Stony Brook, New York</p>
-                    <p class="details">
-                        <!-- Focus on outcomes—performance gains, revenue impact, adoption metrics, or team/process improvements. -->
-                    </p>
-                </div>
-            </section>
 
-            <section id="skills">
-                <h2>Snapshot</h2>
-                <ul class="info-list">
-                    <li>Location: Brookhaven, New York</li>
-                    <li>Email: <a href="mailto:yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
-                    <li>GitHub: <a href="https://github.com/yl1127" target="_blank" rel="noreferrer">github.com/yl1127</a></li>
-                    <!-- <li>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></li> -->
-                    <!-- <li>Portfolio: <a href="https://yourdomain.com" target="_blank" rel="noreferrer">yourdomain.com</a></li> -->
-                </ul>
-            </section>
-        </div>
+        <hr class="section-divider">
+        <section id="research">
+            <h2>Selected Research</h2>
+            <ul class="research-list">
+                <li class="project-item">Pan Y, Urban N, Lin W, Zhu W, Jantre S. Hybrid Machine Learning–Physics Modeling for E3SM Uncertainty Quantification. <em>In progress.</em></li>
+                <li class="project-item">Pan Y, Park T, Lin W, Zhu W. NeuralCora: a framework for Deep Learning research on Coastal Ocean Reanalysis.</li>
+                <li class="project-item">Pan Y, Wang W, Liu Y, Zhang M, Zhu W, Lin W, Liu Z (2025). LLMs Performance Evaluation: A Case Study in Climate Change Statements. <em>SIGMETRICS Perform. Eval. Rev.</em>, 53(2), 79–81 (September 2025). doi:10.1145/3764944.3764960.</li>
+                <li class="project-item">Pan Y, Nehm RH (2025). Large Language Model and Traditional Machine Learning Scoring of Evolutionary Explanations: Benefits and Drawbacks. <em>Education Sciences</em>, 15(6), 676. doi:10.3390/educsci15060676.</li>
+            </ul>
+        </section>
 
-        <div class="grid">
-            <section>
-                <h2>Highlighted Projects</h2>
+        <hr class="section-divider">
+        <section id="experience">
+            <h2>Experience</h2>
+            <ul class="experience-list">
+                <li>Research Assistant · Computing and Data Sciences (CDS), Brookhaven National Laboratory <span class="experience-note">· 2026 – Present</span></li>
+                <li>Research Assistant, Stony Brook University <span class="experience-note">· 2024 – 2026</span></li>
+                <li>Teaching Assistant, Stony Brook University <span class="experience-note">· 2022 – 2024</span></li>
+            </ul>
+        </section>
 
-                <div class="project-item">
-                    <h3>HybridSCM</h3>
-                    <p class="meta">Project Lead · 2026 (TBD)</p>
-                    <p class="details">
-                        Led the development of a hybrid climate-modeling workflow combining E3SM-SCM simulations with neural surrogate models for fast parameter sensitivity analysis and uncertainty quantification.
-                        Designed automated pipelines for experiment sampling, batch simulation, output processing, and visualization, reducing the cost of exploring large climate parameter spaces.
-                        <br><br>
-                        <!-- <a href="https://github.com/yl1127/neuralcora" target="_blank" rel="noopener noreferrer">View Code on GitHub</a> -->
-                    </p>
-                </div>
-                
-                <div class="project-item">
-                    <h3>NeuralCora: a framework for Deep Learning research on Coastal Ocean Reanalysis</h3>
-                    <p class="meta">Project Lead · 2025 (TBD)</p>
-                    <p class="details">
-                        NeuralCora aims to bring station-level forecasting—traditionally reliant on expensive observation devices—to broader coastal communities. 
-                        As the Student Research Lead, I oversee model design, data integration, and validation efforts to ensure accessible, accurate, and cost-effective climate insights powered by AI.  
-                        <!-- <br><br> -->
-                        <a href="https://github.com/yl1127/neuralcora" target="_blank" rel="noopener noreferrer">View Code on GitHub</a>
-                    </p>
-                </div>
-                <div class="project-item">
-                    <h3>Large Language Model and Traditional Machine Learning Scoring of Evolutionary Explanations: Benefits and Drawbacks</h3>
-                    <p class="meta">Co-author · 2025.5</p>
-                    <p class="details">
-                        Co-researched with Prof Nehm to compare large language models and traditional machine-learning methods for automated scoring of students' evolutionary explanations. 
-                        Contributed to prompt design, data processing, and statistical evaluation, revealing trade-offs between accuracy, efficiency, and reliability in AI-based assessment. 
-                        <a href="https://www.researchgate.net/publication/392214651_Large_Language_Model_and_Traditional_Machine_Learning_Scoring_of_Evolutionary_Explanations_Benefits_and_Drawbacks" target="_blank" rel="noopener noreferrer">Read Paper</a>
-                    </p>
-                </div>
-            </section>
 
-            <section>
-                <h2>Skills</h2>
-                <div class="skills-groups">
-                    <div class="skill-group">
-                        <h3>Research Computing</h3>
-                        <p>Python · R · SQL · SAS · NumPy · pandas</p>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Machine Learning</h3>
-                        <p>PyTorch · scikit-learn · Ollama · Hugging Face</p>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Scientific Workflows</h3>
-                        <p>E3SM · scmlib · SciPy · Plotly · Matplotlib · xarray</p>
-                    </div>
-                    <div class="skill-group">
-                        <h3>Deployment &amp; Tools</h3>
-                        <p>GitHub · Docker · AWS · Azure · Google Cloud · n8n</p>
-                    </div>
-                </div>
-            </section>
-        </div>
 
-        <section>
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>Stony Brook University · Doctor of Philosophy(TBD)</h3>
-                <p class="meta">2022 – Current · Applied Math and Statistics</p>
-                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
-            </div>
-            <div class="education-item">
-                <h3>Stony Brook University · Master of Science</h3>
-                <p class="meta">2020 – 2022 · Applied Math and Statistics</p>
-                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
-            </div>
-            <div class="education-item">
-                <h3>Shandong University of Science and Technology · Bachelor of Science</h3>
-                <p class="meta">2015 – 2019 · Applied Mathematics </p>
-                <!-- <p class="details">Optional highlight of honors, research, or relevant coursework.</p> -->
+        <hr class="section-divider">
+        <section id="skills">
+            <h2>Research &amp; Technical Skills</h2>
+            <div class="skills-groups">
+                <div class="skill-group">
+                    <h3>Statistical Modeling &amp; Analysis</h3>
+                    <p>Uncertainty quantification · Bayesian inference · Computational statistics · Surrogate &amp; reduced-order modeling · Gaussian process emulation · MCMC estimation</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Climate &amp; Scientific Computing</h3>
+                    <p>Earth system modeling · Atmospheric data analysis · Simulation diagnostics · Numerical stability testing · E3SM · scmlib · MAGICC</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Machine Learning</h3>
+                    <p>Spatiotemporal forecasting · CNNs, ResNets &amp; U-Nets · Model training &amp; validation · Forecast evaluation · LLM fine-tuning · DreamBooth &amp; LoRA fine-tuning · NVFP4 quantization · Speculative decoding · Multimodal inference · JAX optimization · Single-cell RNA-seq analysis · Portfolio optimization</p>
+                    <p class="skill-tools">PyTorch · scikit-learn · TensorRT · TensorRT-LLM · JAX · LLaMA Factory · NVIDIA NeMo · Unsloth · NVIDIA Model Optimizer · cuOpt</p>
+                </div>
+                <div class="skill-group">
+                    <h3>AI</h3>
+                    <p>Local LLM deployment &amp; serving · RAG application deployment · Text-to-knowledge-graph workflows · Video search &amp; summarization · Real-time VLM interaction · Local agent deployment · Multi-agent chatbots · Sandboxed agent execution · AI-assisted coding</p>
+                    <p class="skill-tools">Ollama · llama.cpp · LM Studio · vLLM · SGLang · NVIDIA NIM · OpenClaw · Hermes Agent · NemoClaw · NVIDIA OpenShell · NVIDIA AI Workbench · NVIDIA VSS Blueprint · Live VLM WebUI · Continue · Telegram</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Research Software &amp; Computing</h3>
+                    <p>Version control · Reproducible workflows · Containerization · HPC workflows · Multi-node connectivity &amp; NCCL setup · Remote access configuration · GPU kernel benchmarking · Robotics simulation setup</p>
+                    <p class="skill-tools">Git / GitHub · Linux · Docker · Conda · Jupyter · NERSC Perlmutter · CUDA · cuTile · NCCL · Tailscale · Isaac Sim · Isaac Lab</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Programming, Data Analysis &amp; Visualization</h3>
+                    <p>Scientific data processing · Multidimensional data analysis · Time-series visualization · Interactive charts · Research figures · GPU-accelerated data science</p>
+                    <p class="skill-tools">Python · SQL · NumPy · pandas · SciPy · xarray · Matplotlib · Plotly · RAPIDS · cuDF · cuML</p>
+                </div>
+                <div class="skill-group">
+                    <h3>Cloud &amp; Automation</h3>
+                    <p class="skill-tools">AWS · Azure · Google Cloud · n8n</p>
+                </div>
             </div>
         </section>
 
+        <hr class="section-divider">
+        <section id="education">
+            <h2>Education</h2>
+            <ul class="education-list">
+                <li>PhD in Applied Mathematics &amp; Statistics <span class="education-note">(in progress)</span>, Stony Brook University <span class="education-note">· 2022 – Present</span></li>
+                <li>MS in Applied Mathematics &amp; Statistics, Stony Brook University <span class="education-note">· 2020 – 2022</span></li>
+                <li>BS in Applied Mathematics, Shandong University of Science and Technology <span class="education-note">· 2015 – 2019</span></li>
+            </ul>
+        </section>
+
+        <hr class="section-divider">
  <section id="memories">
   <h2>Memories</h2>
   <div class="memory-gallery">
@@ -610,11 +149,17 @@
   </div>
 </section>
 
-        <section class="ai-learning" id="ai-learning">
-            <h2>AI Learning &amp; Practice</h2>
-            <p class="ai-learning__intro">
-                A running record of my applied AI learning, combining structured short courses with hands-on local AI workflow playbooks.
-            </p>
+
+        <hr class="section-divider">
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact</h2>
+            <h3>Let’s connect</h3>
+            <p class="contact-intro">Interested in scientific machine learning, climate modeling, or research collaboration? Feel free to reach out.</p>
+            <ul class="info-list">
+                <li>Location: Brookhaven, New York</li>
+                <li>Email: <a href="mailto:yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
+                <li>GitHub: <a href="https://github.com/yl1127" target="_blank" rel="noopener noreferrer">github.com/yl1127</a></li>
+            </ul>
         </section>
 
     </main>
@@ -624,6 +169,68 @@
     </footer>
 
     <script>
+        const themeToggle = document.querySelector(".theme-toggle");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const updateThemeToggle = () => {
+            const dark = (document.documentElement.dataset.theme || (systemTheme.matches ? "dark" : "light")) === "dark";
+            themeToggle.classList.toggle("is-dark", dark);
+            themeToggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+            themeToggle.title = themeToggle.getAttribute("aria-label");
+        };
+        themeToggle.hidden = false;
+        updateThemeToggle();
+        systemTheme.addEventListener("change", updateThemeToggle);
+        themeToggle.addEventListener("click", () => {
+            const next = themeToggle.classList.contains("is-dark") ? "light" : "dark";
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem("homepage-theme", next); } catch {}
+            updateThemeToggle();
+        });
+
+        const stickyNav = document.querySelector(".site-nav--sticky");
+        const introSection = document.getElementById("about");
+        const sectionLinks = [...stickyNav.querySelectorAll(".nav-section-links a")];
+        const navigationSections = sectionLinks.map(link => document.querySelector(link.getAttribute("href")));
+        const updateNavProfile = () => {
+            const pastIntro = introSection.getBoundingClientRect().bottom <= stickyNav.getBoundingClientRect().bottom;
+            stickyNav.classList.toggle("has-profile", pastIntro);
+
+            const readingLine = stickyNav.getBoundingClientRect().bottom + 24;
+            let currentSection = -1;
+            navigationSections.forEach((section, index) => {
+                if (section.getBoundingClientRect().top <= readingLine) currentSection = index;
+            });
+            // The final section may be too short to reach the reading line.
+            const atPageEnd = window.scrollY > 0 &&
+                window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+            if (atPageEnd) currentSection = navigationSections.length - 1;
+            sectionLinks.forEach((link, index) => {
+                if (index === currentSection) link.setAttribute("aria-current", "location");
+                else link.removeAttribute("aria-current");
+            });
+        };
+        let profileFramePending = false;
+        window.addEventListener("scroll", () => {
+            if (profileFramePending) return;
+            profileFramePending = true;
+            requestAnimationFrame(() => {
+                updateNavProfile();
+                profileFramePending = false;
+            });
+        }, { passive: true });
+        window.addEventListener("pageshow", updateNavProfile);
+        window.addEventListener("resize", updateNavProfile);
+        const updateNavOffset = () => {
+            document.documentElement.style.setProperty("--nav-offset", `${Math.ceil(stickyNav.getBoundingClientRect().height) + 20}px`);
+            updateNavProfile();
+        };
+        updateNavOffset();
+        if ("ResizeObserver" in window) {
+            new ResizeObserver(updateNavOffset).observe(stickyNav);
+        } else {
+            window.addEventListener("resize", updateNavOffset);
+        }
+
         const yearEl = document.getElementById("year");
         if (yearEl) {
             yearEl.textContent = new Date().getFullYear();
@@ -647,159 +254,6 @@
         const overlayCaption = overlay.querySelector("#memoryOverlayCaption");
         const closeOverlayBtn = overlay.querySelector(".memory-overlay__close");
         let lastFocusedElement = null;
-
-        const deeplearningAiCourses = [
-            ["Event-Driven Agentic Document Workflows", "LlamaIndex", "59m", "Beginner"],
-            ["Reinforcement Fine-Tuning LLMs With GRPO", "Predibase", "1h23m", "Intermediate"],
-            ["MCP: Build Rich-Context AI Apps with Anthropic", "Anthropic", "1h38m", "Intermediate"],
-            ["Building Agentic RAG with Llamaindex", "LlamaIndex", "44m", "Beginner"],
-            ["AI Agents in LangGraph", "LangChain, Tavily", "1h32m", "Intermediate"],
-            ["Preprocessing Unstructured Data for LLM Applications", "Unstructured", "1h12m", "Beginner"],
-            ["AI Python for Beginners", "DeepLearning.AI", "10h20m", "Beginner"],
-            ["Building Generative AI Applications with Gradio", "Hugging Face", "49m", "Beginner"],
-            ["Building and Evaluating Advanced RAG", "TruEra, LlamaIndex", "1h55m", "Beginner"],
-            ["Multimodal RAG: Chat with Videos", "Intel", "1h", "Intermediate"],
-            ["Quantization in Depth", "Hugging Face", "2h10m", "Intermediate"],
-            ["Prompt Engineering with Llama 2&3", "Meta", "1h53m", "Beginner"],
-            ["Pretraining LLMs", "Upstage", "1h19m", "Intermediate"],
-            ["Intro to Federated Learning", "Flower Labs", "1h8m", "Beginner"],
-            ["Improving Accuracy of LLM Applications", "AMD, formerly Lamini, Meta", "1h41m", "Intermediate"],
-            ["Large Language Models with Semantic Search", "Cohere", "1h12m", "Beginner"],
-            ["Function-calling and data extraction with LLMs", "Nexusflow", "59m", "Beginner"],
-            ["AI Agentic Design Patterns with AutoGen", "Microsoft, Penn State University", "1h25m", "Beginner"],
-            ["Attention in Transformers: Concepts and Code in PyTorch", "StatQuest", "1h6m", "Beginner"],
-            ["How Transformer LLMs Work", "Jay Alammar, Maarten Grootendorst", "1h34m", "Beginner"],
-            ["Building toward Computer Use with Anthropic", "Anthropic", "1h37m", "Beginner"],
-            ["Reasoning with o1", "OpenAI", "1h24m", "Intermediate"],
-            ["Collaborative Writing and Coding with OpenAI Canvas", "OpenAI", "37m", "Beginner"],
-            ["Building Your Own Database Agent", "Microsoft", "58m", "Beginner"],
-            ["Prompt Engineering for Vision Models", "Comet", "1h22m", "Beginner"],
-            ["Getting Started with Mistral", "Mistral AI", "52m", "Beginner"],
-            ["Quantization Fundamentals with Hugging Face", "Hugging Face", "1h4m", "Beginner"],
-            ["Building Systems with the ChatGPT API", "OpenAI", "1h45m", "Beginner"],
-            ["Knowledge Graphs for RAG", "Neo4j", "1h54m", "Intermediate"],
-            ["Open Source Models with Hugging Face", "Hugging Face", "2h3m", "Beginner"],
-            ["Reinforcement Learning From Human Feedback", "Google Cloud", "1h12m", "Intermediate"],
-            ["Functions, Tools and Agents with LangChain", "LangChain", "1h44m", "Intermediate"],
-            ["Finetuning Large Language Models", "AMD, formerly Lamini", "1h25m", "Intermediate"],
-            ["LangChain Chat with Your Data", "LangChain", "1h8m", "Beginner"],
-            ["ChatGPT Prompt Engineering for Developers", "OpenAI", "1h30m", "Beginner"],
-            ["LangChain for LLM Application Development", "LangChain", "1h38m", "Beginner"],
-            ["Advanced Retrieval for AI with Chroma", "Chroma", "52m", "Intermediate"],
-            ["How Diffusion Models Work", "DeepLearning.AI", "36m", "Intermediate"],
-        ];
-
-        const nvidiaDgxSparkPlaybooks = [
-            ["Single-cell RNA Sequencing", "15 min · End-to-end GPU-powered workflow for scRNA-seq using RAPIDS."],
-            ["Portfolio Optimization", "20 min · GPU-accelerated portfolio optimization using cuOpt and cuML."],
-            ["CUDA-X Data Science", "30 min · Accelerate UMAP, HDBSCAN, pandas, and more with NVIDIA cuML and cuDF."],
-            ["Text to Knowledge Graph", "30 min · Transform unstructured text into interactive knowledge graphs with LLM inference and graph visualization."],
-            ["Optimized JAX", "2 hrs · Optimize JAX to run on Spark."],
-            ["LLaMA Factory", "Install and fine-tune models with LLaMA Factory."],
-            ["Fine-tune with Pytorch", "Use Pytorch to fine-tune models locally."],
-            ["FLUX.1 Dreambooth LoRA Fine-tuning", "1 hr · Fine-tune FLUX.1-dev 12B with Dreambooth LoRA for custom image generation."],
-            ["Fine-tune with NeMo", "1 hr · Use NVIDIA NeMo to fine-tune models locally."],
-            ["Unsloth on DGX Spark", "1 hr · Optimized fine-tuning with Unsloth."],
-            ["Speculative Decoding", "30 min · Set up speculative decoding for fast inference on Spark."],
-            ["Run models with llama.cpp on DGX Spark", "30 min · Build llama.cpp with CUDA and serve models via an OpenAI-compatible API."],
-            ["Nemotron-3-Nano with llama.cpp", "30 min · Run Nemotron-3-Nano-30B using llama.cpp on DGX Spark."],
-            ["SGLang for Inference", "30 min · Install and use SGLang on DGX Spark."],
-            ["NIM on Spark", "30 min · Deploy a NIM on Spark."],
-            ["LM Studio on DGX Spark", "30 min · Deploy LM Studio, serve LLMs on Spark, and use LM Link remotely."],
-            ["vLLM for Inference", "30 min · Install and use vLLM on DGX Spark."],
-            ["TRT LLM for Inference", "1 hr · Install and use TensorRT-LLM on DGX Spark."],
-            ["NVFP4 Quantization", "1 hr · Quantize a model to NVFP4 using TensorRT Model Optimizer."],
-            ["Multi-modal Inference", "1 hr · Set up multi-modal inference with TensorRT."],
-            ["Connect Three DGX Spark in a Ring Topology", "Connect and set up three DGX Spark devices in a ring topology."],
-            ["Connect Multiple DGX Spark through a Switch", "Set up a cluster of DGX Spark devices connected through a switch."],
-            ["VS Code", "5 min · Install and use VS Code locally or remotely."],
-            ["RAG Application in AI Workbench", "30 min · Clone and run a reproducible RAG application with AI Workbench."],
-            ["Set up Tailscale on Your Spark", "30 min · Connect to Spark on a home network from anywhere."],
-            ["Connect Two Sparks", "Connect two Spark devices and set them up for inference and fine-tuning."],
-            ["Build a Video Search and Summarization (VSS) Agent", "Run the VSS Blueprint on Spark."],
-            ["Spark & Reachy Photo Booth", "2 hrs · AI augmented photo booth using DGX Spark and Reachy Mini."],
-            ["OpenClaw", "Run OpenClaw locally on DGX Spark with LM Studio or Ollama."],
-            ["CLI Coding Agent", "20 min · Build local CLI coding agents with Ollama."],
-            ["Live VLM WebUI", "20 min · Real-time vision-language model interaction with webcam streaming."],
-            ["Run Hermes Agent with Local Models", "30 min · Install and run the Hermes self-improving AI agent on DGX Spark."],
-            ["NemoClaw with Nemotron 3 Super and Telegram on DGX Spark", "30 min · Local Ollama inference with Telegram bot integration."],
-            ["Install and Use Isaac Sim and Isaac Lab", "30 min · Build Isaac Sim and Isaac Lab from source for Spark."],
-            ["Vibe Coding in VS Code", "30 min · Use DGX Spark as a local or remote coding assistant with Ollama and Continue."],
-            ["NCCL for Two Sparks", "30 min · Install and test NCCL on two Sparks."],
-            ["Secure Long Running AI Agents with OpenShell on DGX Spark", "30 min · Run OpenClaw with local models in an NVIDIA OpenShell sandbox."],
-            ["cuTile Kernels", "60 min · Run cuTile kernel benchmarks, FMHA implementation, and LLM inference on DGX Spark and B300."],
-            ["Build and Deploy a Multi-Agent Chatbot", "1 hr · Deploy a multi-agent chatbot system and chat with agents on Spark."],
-        ];
-
-        const renderLearningPlatformBlock = (container, { title, note, link, heading, items, itemMeta }) => {
-            const block = document.createElement("div");
-            block.className = "learning-platform-block";
-
-            const platform = document.createElement("h3");
-            platform.textContent = title;
-
-            const noteEl = document.createElement("p");
-            noteEl.className = "learning-platform-note";
-            noteEl.textContent = note;
-            if (link) {
-                noteEl.append(" ");
-                const noteLink = document.createElement("a");
-                noteLink.href = link.href;
-                noteLink.target = "_blank";
-                noteLink.rel = "noopener noreferrer";
-                noteLink.textContent = link.text;
-                noteEl.appendChild(noteLink);
-            }
-
-            const courseHeading = document.createElement("h4");
-            courseHeading.textContent = `${heading} · ${items.length}`;
-
-            const courseList = document.createElement("ul");
-            courseList.className = "course-list";
-            items.forEach((itemData) => {
-                const item = document.createElement("li");
-                const titleEl = document.createElement("strong");
-                const metaEl = document.createElement("span");
-                titleEl.textContent = itemData[0];
-                metaEl.textContent = itemMeta(itemData);
-                item.append(titleEl, metaEl);
-                courseList.appendChild(item);
-            });
-
-            const courseListWrap = document.createElement("div");
-            courseListWrap.className = "course-list-wrap";
-            courseListWrap.appendChild(courseList);
-
-            block.append(platform, noteEl, courseHeading, courseListWrap);
-            container.appendChild(block);
-        };
-
-        const renderAiLearningSection = () => {
-            const container = document.querySelector("#ai-learning");
-            if (!container) {
-                return;
-            }
-
-            renderLearningPlatformBlock(container, {
-                title: "DeepLearning.AI",
-                note: "All completed courses from my DeepLearning.AI learning track.",
-                heading: "Completed Courses",
-                items: deeplearningAiCourses,
-                itemMeta: ([, provider, duration, level]) => `${provider} · ${duration} · ${level} · Completed`,
-            });
-
-            renderLearningPlatformBlock(container, {
-                title: "NVIDIA DGX Spark Playbooks",
-                note: "All playbooks: detailed instructions to set up and run popular AI workflows on DGX Spark.",
-                link: {
-                    href: "https://github.com/NVIDIA/dgx-spark-playbooks/tree/main",
-                    text: "View repository",
-                },
-                heading: "All Playbooks",
-                items: nvidiaDgxSparkPlaybooks,
-                itemMeta: ([, description]) => description,
-            });
-        };
 
         const closeOverlay = () => {
             overlay.classList.remove("is-visible");
@@ -875,7 +329,6 @@
             }
         });
 
-        renderAiLearningSection();
     </script>
 </body>
 </html>
