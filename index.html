@@ -14,7 +14,7 @@
             if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.theme = savedTheme;
         } catch {}
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20261013-ai-details">
+    <link rel="stylesheet" href="./styles.css?v=20261014-contact-width">
 </head>
 <body>
     <nav class="site-nav site-nav--sticky" aria-label="Primary sections">
@@ -31,8 +31,6 @@
         <a href="#skills">Skills</a>
         <span aria-hidden="true">|</span>
         <a href="#education">Education</a>
-        <span aria-hidden="true">|</span>
-        <a href="#memories">Memories</a>
         <span aria-hidden="true">|</span>
         <a href="#contact">Contact</a>
         </div>
@@ -129,36 +127,14 @@
         </section>
 
         <hr class="section-divider">
- <section id="memories">
-  <h2>Memories</h2>
-  <div class="memory-gallery">
-    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: ACM Sigmetrics 2025 conference">
-      <img src="./docs/ACM-2025.jpg" alt="Attending the ACM SIGMETRICS 2025 conference with Professor Liu" loading="lazy" decoding="async">
-      <figcaption>At the ACM SIGMETRICS 2025 conference with Professor Liu — an inspiring experience exploring cutting-edge research.</figcaption>
-    </figure>
-
-    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: NARST 2025 conference">
-      <img src="./docs/narst-2025.JPG" alt="Attending the NARST 2025 conference with Professor Nehm" loading="lazy" decoding="async">
-      <figcaption>Presenting at the NARST 2025 conference with Professor Nehm — sharing our work on science education and learning analytics.</figcaption>
-    </figure>
-
-    <figure class="memory-card" role="button" tabindex="0" aria-label="Expand memory photo: undergraduate graduation 2019">
-      <img src="./docs/graduate-2019.jpg" alt="Undergraduate graduation ceremony with my father in 2019" loading="lazy" decoding="async">
-      <figcaption>Celebrating my undergraduate graduation in 2019 — a proud moment shared with my dad.</figcaption>
-    </figure>
-  </div>
-</section>
-
-
-        <hr class="section-divider">
         <section id="contact" aria-labelledby="contact-heading">
             <h2 id="contact-heading">Contact</h2>
             <h3>Let’s connect</h3>
-            <p class="contact-intro">Interested in scientific machine learning, climate modeling, or research collaboration? Feel free to reach out.</p>
+            <p class="contact-intro">Interested in AI, machine learning, statistics, or research collaboration? Feel free to reach out.</p>
             <ul class="info-list">
                 <li>Location: Brookhaven, New York</li>
-                <li>Email: <a href="mailto:yunlong.pan@stonybrook.edu">yunlong.pan@stonybrook.edu</a></li>
-                <li>GitHub: <a href="https://github.com/yl1127" target="_blank" rel="noopener noreferrer">github.com/yl1127</a></li>
+                <li>Email: yunlong.pan AT stonybrook DOT edu</li>
+                <li>GitHub: github.com/yl1127</li>
             </ul>
         </section>
 
@@ -235,99 +211,6 @@
         if (yearEl) {
             yearEl.textContent = new Date().getFullYear();
         }
-
-        const expandableCards = document.querySelectorAll(".memory-card");
-        const overlay = document.createElement("div");
-        overlay.className = "memory-overlay";
-        overlay.id = "memoryOverlay";
-        overlay.setAttribute("aria-hidden", "true");
-        overlay.innerHTML = `
-            <div class="memory-overlay__content" role="dialog" aria-modal="true" aria-labelledby="memoryOverlayCaption">
-                <button class="memory-overlay__close" type="button" aria-label="Close enlarged memory photo">&times;</button>
-                <img id="memoryOverlayImage" src="" alt="">
-                <p id="memoryOverlayCaption"></p>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-
-        const overlayImage = overlay.querySelector("#memoryOverlayImage");
-        const overlayCaption = overlay.querySelector("#memoryOverlayCaption");
-        const closeOverlayBtn = overlay.querySelector(".memory-overlay__close");
-        let lastFocusedElement = null;
-
-        const closeOverlay = () => {
-            overlay.classList.remove("is-visible");
-            overlay.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-            if (overlayImage) {
-                overlayImage.src = "";
-            }
-            if (overlayCaption) {
-                overlayCaption.textContent = "";
-            }
-            lastFocusedElement?.focus();
-            lastFocusedElement = null;
-        };
-
-        const openOverlay = (card) => {
-            const img = card.querySelector("img");
-            const caption = card.querySelector("figcaption");
-            if (!img || !caption || !overlayImage || !overlayCaption) {
-                return;
-            }
-            lastFocusedElement = document.activeElement;
-            overlayImage.hidden = false;
-            overlayCaption.hidden = false;
-            overlayImage.src = img.src;
-            overlayImage.alt = img.alt;
-            overlayCaption.textContent = caption.textContent;
-            overlay.classList.add("is-visible");
-            overlay.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-            closeOverlayBtn?.focus();
-        };
-
-        expandableCards.forEach((card) => {
-            card.addEventListener("click", () => openOverlay(card));
-            card.addEventListener("keydown", (event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    openOverlay(card);
-                }
-            });
-        });
-
-        closeOverlayBtn?.addEventListener("click", closeOverlay);
-        overlay.addEventListener("click", (event) => {
-            if (event.target === overlay) {
-                closeOverlay();
-            }
-        });
-        window.addEventListener("keydown", (event) => {
-            if (!overlay.classList.contains("is-visible")) {
-                return;
-            }
-            if (event.key === "Escape") {
-                closeOverlay();
-                return;
-            }
-            if (event.key !== "Tab") {
-                return;
-            }
-            const focusableElements = overlay.querySelectorAll("button, [href], [tabindex]:not([tabindex='-1'])");
-            if (!focusableElements.length) {
-                return;
-            }
-            const firstFocusable = focusableElements[0];
-            const lastFocusable = focusableElements[focusableElements.length - 1];
-            if (event.shiftKey && document.activeElement === firstFocusable) {
-                event.preventDefault();
-                lastFocusable.focus();
-            } else if (!event.shiftKey && document.activeElement === lastFocusable) {
-                event.preventDefault();
-                firstFocusable.focus();
-            }
-        });
 
     </script>
 </body>
